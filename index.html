@@ -3,26 +3,27 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>حكاية أولى تاني ❤️</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#f1f6fc;color:#17324d}
-header{background:linear-gradient(135deg,#123b63,#3686c9);color:white;text-align:center;padding:30px 12px;border-radius:0 0 25px 25px}
-header h1{font-size:29px}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f6fc;color:#17324d}
+header{background:linear-gradient(135deg,#123b63,#3686c9);color:white;text-align:center;padding:28px 12px;border-radius:0 0 25px 25px}
+header h1{font-size:28px}
 main{max-width:850px;margin:20px auto;padding:0 12px}
-section{background:white;padding:18px;margin-bottom:16px;border-radius:17px;box-shadow:0 4px 15px #123b6310}
+section{background:white;padding:18px;margin-bottom:16px;border-radius:16px;box-shadow:0 3px 15px #123b6310}
 h2{color:#19558b}
 input,select,textarea,button{width:100%;padding:12px;margin:7px 0;border:1px solid #ccd9e6;border-radius:10px;font-size:16px}
-button{background:#19558b;color:white;border:0;font-weight:bold;cursor:pointer}
-button.delete{background:#b42318}
+button{background:#19558b;color:white;border:0;font-weight:bold}
+button:disabled{opacity:.6}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
 .item{border:1px solid #e2eaf2;border-radius:12px;overflow:hidden;padding-bottom:10px}
-.item img,.item video{width:100%;max-height:260px;object-fit:cover;background:#eee}
+.item img,.item video{width:100%;max-height:260px;object-fit:contain;background:#eee}
 .item p{padding:0 10px;overflow-wrap:anywhere}
 .small{font-size:13px;color:#65788b}
-.hidden{display:none}
-.notice{background:#fff5d9;padding:12px;border-radius:10px;line-height:1.7}
+.hidden{display:none!important}
+.status{white-space:pre-wrap;overflow-wrap:anywhere;background:#edf5fd;padding:10px;border-radius:9px}
+.delete{background:#b42318}
 </style>
 </head>
 <body>
@@ -34,12 +35,12 @@ button.delete{background:#b42318}
 <main>
 <section>
 <h2>أهلًا بيكم في ذكريات فصلنا</h2>
-<p>هنا هنجمع صور وفيديوهات أنشطتنا ولحظاتنا طول السنة الدراسية ❤️</p>
-<div class="notice">احترموا خصوصية زملائكم، ومتشاركوش صور أي حد من غير موافقته.</div>
+<p>مكان يجمع صور وفيديوهات أنشطتنا ولحظاتنا طول السنة الدراسية ❤️</p>
+<p class="small">احترموا خصوصية زملائكم قبل مشاركة الصور.</p>
 </section>
 
 <section>
-<h2>📚 ألبوم الذكريات</h2>
+<h2>🖼️ ألبوم الذكريات</h2>
 <select id="filter">
 <option value="">كل المواد</option>
 <option>عربي</option><option>وطنية</option><option>دين</option>
@@ -47,29 +48,28 @@ button.delete{background:#b42318}
 <option>رياضة</option><option>ريادة أعمال</option><option>الأنشطة الرياضية</option>
 </select>
 <div id="gallery" class="grid">جاري تحميل الذكريات...</div>
-<p id="status" class="small"></p>
+<p id="status" class="status">جاري الاتصال...</p>
 </section>
 
 <section>
 <h2>🔐 دخول المسؤول</h2>
 <div id="login">
-<input id="email" type="email" placeholder="البريد الإلكتروني للمسؤول">
-<input id="password" type="password" placeholder="كلمة المرور">
-<button id="loginBtn">تسجيل الدخول</button>
-<p class="small">الدخول متاح للحساب المصرح له فقط.</p>
+<input id="email" type="email" autocomplete="username" placeholder="البريد الإلكتروني">
+<input id="password" type="password" autocomplete="current-password" placeholder="كلمة المرور">
+<button id="loginBtn" type="button">تسجيل الدخول</button>
 </div>
 <div id="admin" class="hidden">
-<h2>➕ إضافة ذكرى جديدة</h2>
+<h2>➕ إضافة ذكرى</h2>
 <input id="title" placeholder="عنوان الصورة أو الفيديو">
 <select id="subject">
 <option>عربي</option><option>وطنية</option><option>دين</option>
 <option>برمجة</option><option>فني طهي</option><option>إنجليزي</option>
 <option>رياضة</option><option>ريادة أعمال</option><option>الأنشطة الرياضية</option>
 </select>
-<textarea id="description" placeholder="وصف بسيط (اختياري)"></textarea>
+<textarea id="description" placeholder="وصف اختياري"></textarea>
 <input id="file" type="file" accept="image/*,video/*">
-<button id="uploadBtn">رفع الصورة أو الفيديو</button>
-<button id="logoutBtn" style="background:#60768b">تسجيل الخروج</button>
+<button id="uploadBtn" type="button">رفع الصورة أو الفيديو</button>
+<button id="logoutBtn" type="button" style="background:#60768b">تسجيل الخروج</button>
 </div>
 </section>
 </main>
@@ -77,56 +77,61 @@ button.delete{background:#b42318}
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const SUPABASE_URL = "https://ylgdezjbjgwaoejcdojq.supabase.co";
-const SUPABASE_KEY = "sb_publishable_C_PcHMA8lqWI_-Pwwz_OaA_l4iCDQZM";
+(() => {
+"use strict";
+
+const URL = "https://ylgdezjbjgwaoejcdojq.supabase.co";
+const KEY = "sb_publishable_C_PcHMA8lqWI_-Pwwz_OaA_l4iCDQZM";
 const BUCKET = "class-memories1-2";
-const ADMIN_ID = "59fe8a52-c263-4b4c-85cc-967983e5c64a
-
-
-Created at
-21 Oct";
-const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const ADMIN_ID = "59fe8a52-c263-4b4c-85cc-967983e5c64a";
 
 const $ = id => document.getElementById(id);
-let currentUser = null;
-let activities = [];
+const status = text => $("status").textContent = text;
+let db, user = null, items = [];
 
-function message(t){ $("status").textContent = t; }
-
-function updateAdmin(){
-  const allowed = currentUser && currentUser.id === ADMIN_ID;
+function showAdmin(){
+  const allowed = user && user.id === ADMIN_ID;
   $("login").classList.toggle("hidden", !!allowed);
   $("admin").classList.toggle("hidden", !allowed);
 }
 
-async function loadActivities(){
-  message("جاري تحميل الذكريات...");
-  const {data,error} = await db.from("activities")
-    .select("*").order("created_at",{ascending:false});
-  if(error){ message("تعذر تحميل الصور: " + error.message); return; }
-  activities = data || [];
-  renderGallery();
+async function load(){
+  $("gallery").textContent = "جاري تحميل الذكريات...";
+  try{
+    const {data,error} = await db.from("activities")
+      .select("id,subject,title,description,media_url,media_type,created_at")
+      .order("created_at",{ascending:false});
+    if(error) throw error;
+    items = data || [];
+    render();
+    status(items.length ? "تم تحميل الذكريات." : "الألبوم جاهز، ولسه مفيش ذكريات مضافة.");
+  }catch(e){
+    $("gallery").textContent = "تعذر تحميل الألبوم.";
+    status("خطأ في تحميل البيانات: " + e.message);
+  }
 }
 
-function renderGallery(){
+function render(){
   const filter = $("filter").value;
-  const list = activities.filter(a => !filter || a.subject === filter);
   const gallery = $("gallery");
   gallery.replaceChildren();
+  const list = items.filter(a => !filter || a.subject === filter);
 
   if(!list.length){
-    gallery.textContent = "لسه مفيش ذكريات مضافة هنا.";
+    gallery.textContent = "مفيش ذكريات في القسم ده لحد دلوقتي.";
     return;
   }
 
-  list.forEach(a => {
-    const card = document.createElement("div");
+  for(const a of list){
+    const card = document.createElement("article");
     card.className = "item";
     let media;
+
     if(a.media_type === "video"){
       media = document.createElement("video");
       media.controls = true;
       media.playsInline = true;
+      media.preload = "metadata";
     }else{
       media = document.createElement("img");
       media.loading = "lazy";
@@ -150,116 +155,158 @@ function renderGallery(){
       card.appendChild(desc);
     }
 
-    if(currentUser && currentUser.id === ADMIN_ID){
+    if(user && user.id === ADMIN_ID){
       const del = document.createElement("button");
       del.className = "delete";
       del.textContent = "حذف الذكرى";
-      del.onclick = () => deleteActivity(a);
+      del.onclick = () => removeActivity(a);
       card.appendChild(del);
     }
     gallery.appendChild(card);
-  });
+  }
 }
 
-$("filter").addEventListener("change",renderGallery);
+$("filter").onchange = render;
 
 $("loginBtn").onclick = async () => {
+  const btn = $("loginBtn");
   const email = $("email").value.trim();
   const password = $("password").value;
-  if(!email || !password){ alert("اكتب البريد الإلكتروني وكلمة المرور"); return; }
-  const {data,error} = await db.auth.signInWithPassword({email,password});
-  if(error){ alert("تعذر تسجيل الدخول. راجع البريد وكلمة المرور."); return; }
-  if(data.user.id !== ADMIN_ID){
-    await db.auth.signOut();
-    alert("الحساب ده مش مصرح له بإدارة الموقع.");
+  if(!email || !password){
+    status("اكتب البريد الإلكتروني وكلمة المرور الأول.");
     return;
   }
-  currentUser = data.user;
-  updateAdmin();
-  renderGallery();
+
+  btn.disabled = true;
+  status("جاري تسجيل الدخول...");
+  try{
+    const {data,error} = await db.auth.signInWithPassword({email,password});
+    if(error) throw error;
+
+    if(data.user.id !== ADMIN_ID){
+      await db.auth.signOut();
+      user = null;
+      showAdmin();
+      throw new Error("الحساب ده مش محدد كمسؤول في كود الموقع.");
+    }
+
+    user = data.user;
+    showAdmin();
+    render();
+    status("تم تسجيل الدخول بنجاح.");
+  }catch(e){
+    status("تعذر تسجيل الدخول: " + e.message);
+  }finally{
+    btn.disabled = false;
+  }
 };
 
 $("logoutBtn").onclick = async () => {
-  await db.auth.signOut();
-  currentUser = null;
-  updateAdmin();
-  renderGallery();
+  const {error} = await db.auth.signOut();
+  if(error){ status("تعذر تسجيل الخروج: " + error.message); return; }
+  user = null;
+  showAdmin();
+  render();
+  status("تم تسجيل الخروج.");
 };
 
 $("uploadBtn").onclick = async () => {
-  if(!currentUser || currentUser.id !== ADMIN_ID){
-    alert("سجّل دخولك بالحساب المصرح له أولًا."); return;
-  }
-  const file = $("file").files[0];
-  const title = $("title").value.trim();
-  if(!file || !title){ alert("اكتب العنوان واختار ملفًا."); return; }
-  if(!file.type.startsWith("image/") && !file.type.startsWith("video/")){
-    alert("اختار صورة أو فيديو فقط."); return;
+  if(!user || user.id !== ADMIN_ID){
+    status("سجّل دخولك بحساب المسؤول الأول.");
+    return;
   }
 
-  $("uploadBtn").disabled = true;
-  $("uploadBtn").textContent = "جاري الرفع...";
+  const file = $("file").files[0];
+  const title = $("title").value.trim();
+  if(!file || !title){
+    status("اكتب العنوان واختار صورة أو فيديو.");
+    return;
+  }
+  if(!file.type.startsWith("image/") && !file.type.startsWith("video/")){
+    status("الملف لازم يكون صورة أو فيديو.");
+    return;
+  }
+
+  const btn = $("uploadBtn");
+  btn.disabled = true;
+  status("جاري رفع الملف...");
+  let path = null;
+
   try{
-    const safeName = file.name.replace(/[^\w.\-]/g,"_");
-    const path = "activities/" + Date.now() + "_" + safeName;
+    path = "activities/" + Date.now() + "_" +
+      file.name.replace(/[^\w.\-]/g,"_");
+
     const {error:uploadError} = await db.storage.from(BUCKET)
-      .upload(path,file,{upsert:false,contentType:file.type});
+      .upload(path,file,{contentType:file.type,upsert:false});
     if(uploadError) throw uploadError;
 
     const {data:urlData} = db.storage.from(BUCKET).getPublicUrl(path);
+
     const {error:insertError} = await db.from("activities").insert({
       subject:$("subject").value,
-      title:title,
+      title,
       description:$("description").value.trim() || null,
       media_url:urlData.publicUrl,
       media_type:file.type.startsWith("video/") ? "video" : "image",
-      owner_id:currentUser.id
+      owner_id:user.id
     });
-    if(insertError){
-      await db.storage.from(BUCKET).remove([path]);
-      throw insertError;
-    }
+    if(insertError) throw insertError;
 
     $("title").value = "";
     $("description").value = "";
     $("file").value = "";
-    message("تمت إضافة الذكرى بنجاح ❤️");
-    await loadActivities();
+    status("تمت إضافة الذكرى بنجاح ❤️");
+    await load();
   }catch(e){
-    alert("حصلت مشكلة أثناء الرفع: " + e.message);
+    if(path){
+      await db.storage.from(BUCKET).remove([path]);
+    }
+    status("تعذر رفع الملف: " + e.message);
   }finally{
-    $("uploadBtn").disabled = false;
-    $("uploadBtn").textContent = "رفع الصورة أو الفيديو";
+    btn.disabled = false;
   }
 };
 
-async function deleteActivity(a){
+async function removeActivity(a){
   if(!confirm("متأكد إنك عايز تحذف الذكرى دي؟")) return;
   try{
     const marker = "/object/public/" + BUCKET + "/";
     const i = a.media_url.indexOf(marker);
-    if(i < 0) throw new Error("تعذر تحديد مكان الملف.");
+    if(i < 0) throw new Error("تعذر تحديد مسار الملف.");
+
     const path = decodeURIComponent(a.media_url.slice(i + marker.length));
     const {error:storageError} = await db.storage.from(BUCKET).remove([path]);
     if(storageError) throw storageError;
+
     const {error:rowError} = await db.from("activities").delete().eq("id",a.id);
     if(rowError) throw rowError;
-    await loadActivities();
-    message("تم حذف الذكرى.");
+
+    status("تم حذف الذكرى.");
+    await load();
   }catch(e){
-    alert("تعذر الحذف: " + e.message);
+    status("تعذر الحذف: " + e.message);
   }
 }
 
 async function init(){
-  const {data} = await db.auth.getSession();
-  currentUser = data.session?.user || null;
-  updateAdmin();
-  await loadActivities();
+  try{
+    if(!window.supabase){
+      throw new Error("مكتبة Supabase لم تُحمّل. تأكد من اتصال الإنترنت.");
+    }
+    db = window.supabase.createClient(URL,KEY);
+    const {data,error} = await db.auth.getSession();
+    if(error) throw error;
+    user = data.session ? data.session.user : null;
+    showAdmin();
+    await load();
+  }catch(e){
+    status("مشكلة في تشغيل الموقع: " + e.message);
+    $("gallery").textContent = "تعذر تشغيل الألبوم.";
+  }
 }
+
 init();
+})();
 </script>
 </body>
 </html>
-
-
