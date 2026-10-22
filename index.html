@@ -222,8 +222,17 @@ $("uploadBtn").onclick = async () => {
     status("اكتب العنوان واختار صورة أو فيديو.");
     return;
   }
-  if(!file.type.startsWith("image/") && !file.type.startsWith("video/")){
-    status("الملف لازم يكون صورة أو فيديو.");
+  
+if (
+  !file.type.startsWith("image/") &&
+  !file.type.startsWith("video/") &&
+  file.type !== "application/pdf"
+) {
+  status("اختار صورة أو فيديو أو ملف PDF.");
+  return;
+}
+
+    status("الملف لازم يكون صورة أو فيديو او ملف.");
     return;
   }
 
