@@ -314,21 +314,32 @@ async function removeActivity(a){
   }
 }
 
+
 async function init(){
   try{
     if(!window.supabase){
       throw new Error("مكتبة Supabase لم تُحمّل. تأكد من اتصال الإنترنت.");
     }
+
     db = window.supabase.createClient(URL,KEY);
+
+    // تحميل الألبوم أولًا
+    await load();
+
+    // استرجاع جلسة المسؤول
     const {data,error} = await db.auth.getSession();
     if(error) throw error;
+
     user = data.session ? data.session.user : null;
     showAdmin();
-    await load();
+    render();
+
   }catch(e){
     status("مشكلة في تشغيل الموقع: " + e.message);
     $("gallery").textContent = "تعذر تشغيل الألبوم.";
   }
+}
+
 }
 
 init();
