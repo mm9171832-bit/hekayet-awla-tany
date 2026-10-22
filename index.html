@@ -127,15 +127,31 @@ function render(){
     card.className = "item";
     let media;
 
+    
     if(a.media_type === "video"){
       media = document.createElement("video");
       media.controls = true;
       media.playsInline = true;
       media.preload = "metadata";
+    }else if(a.media_type === "pdf"){
+      media = document.createElement("a");
+      media.href = a.media_url;
+      media.target = "_blank";
+      media.rel = "noopener noreferrer";
+      media.textContent = "📄 فتح ملف PDF: " + a.title;
+      media.className = "pdf-link";
     }else{
       media = document.createElement("img");
       media.loading = "lazy";
       media.alt = a.title;
+      media.src = a.media_url;
+    }
+
+    if(a.media_type !== "pdf"){
+      media.src = a.media_url;
+    }
+    card.appendChild(media);
+
     }
     media.src = a.media_url;
     card.appendChild(media);
